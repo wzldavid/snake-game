@@ -1,0 +1,76 @@
+<!--pages/history/index.wxml-->
+<view class="container">
+  <!-- 选项卡筛选 -->
+  <view class="tabs">
+    <view class="tab-item {{filterType === 'all' ? 'active' : ''}}" bindtap="selectFilter" data-type="all">
+      全部
+    </view>
+    <view class="tab-item {{filterType === 'today' ? 'active' : ''}}" bindtap="selectFilter" data-type="today">
+      今天
+    </view>
+    <view class="tab-item {{filterType === 'week' ? 'active' : ''}}" bindtap="selectFilter" data-type="week">
+      本周
+    </view>
+    <view class="tab-item {{filterType === 'month' ? 'active' : ''}}" bindtap="selectFilter" data-type="month">
+      本月
+    </view>
+  </view>
+
+  <!-- 记录列表 -->
+  <view wx:if="{{records.length > 0}}" class="record-list">
+    <view class="record-group" wx:for="{{groupedRecords}}" wx:key="date">
+      <view class="group-date text-sm text-secondary">{{item.date}}</view>
+      <view class="record-card" wx:for="{{item.records}}" wx:for-item="record" wx:key="id">
+        <view class="record-card-content">
+          <view class="record-icon {{record.isAbnormal ? 'abnormal' : 'normal'}}">
+            <text class="text-sm">{{record.type === 'glucose' ? '血糖' : '血压'}}</text>
+          </view>
+          <view class="record-content">
+            <view class="record-header">
+              <text class="record-type text-md">{{record.type === 'glucose' ? '血糖' : '血压'}}</text>
+              <view class="tag {{record.isAbnormal ? 'tag-abnormal' : 'tag-normal'}}">
+                {{record.isAbnormal ? '异常' : '正常'}}
+              </view>
+            </view>
+            <view class="record-value {{record.isAbnormal ? 'text-danger' : 'text-success'}} text-number">
+              <block wx:if="{{record.type === 'glucose'}}">
+                {{record.value}}
+                <text class="record-unit text-sm">mmol/L</text>
+                <text class="record-sub text-sm text-secondary">{{record.measureTypeText}}</text>
+              </block>
+              <block wx:else>
+                {{record.systolic}}/{{record.diastolic}}
+                <text class="record-unit text-sm">mmHg</text>
+                <text wx:if="{{record.heartRate}}" class="record-sub text-sm text-secondary">
+                  心率: {{record.heartRate}} 次/分
+                </text>
+              </block>
+            </view>
+            <view class="record-time text-sm text-secondary">{{record.time}}</view>
+          </view>
+        </view>
+        <view class="record-actions">
+          <button class="btn btn-text delete-btn" bindtap="deleteRecord" data-id="{{record.id}}" data-type="{{record.type}}">
+            删除
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:else class="empty-state">
+    <text class="empty-state-icon">📋</text>
+    <text class="empty-state-text text-md">暂无记录</text>
+    <text class="empty-state-desc text-sm text-secondary">开始记录您的健康数据</text>
+    <view class="empty-actions">
+      <button class="btn btn-primary btn-primary-medium" bindtap="navigateToRecordGlucose">记录血糖</button>
+      <button class="btn btn-primary btn-primary-medium" bindtap="navigateToRecordPressure">记录血压</button>
+    </view>
+  </view>
+
+  <!-- 加载更多 -->
+  <view wx:if="{{hasMore && records.length > 0}}" class="load-more text-sm text-secondary" bindtap="loadMore">
+    加载更多
+  </view>
+</view>

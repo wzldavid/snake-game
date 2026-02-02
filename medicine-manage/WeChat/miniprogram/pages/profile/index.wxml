@@ -1,0 +1,102 @@
+<!--pages/profile/index.wxml-->
+<view class="container">
+  <!-- 用户信息卡片 -->
+  <view class="user-card fade-in">
+    <view class="user-avatar">
+      <image src="{{userInfo.avatar || '/images/default-avatar.png'}}" class="avatar-image"></image>
+    </view>
+    <view class="user-info">
+      <text class="user-name text-xl">{{userInfo.nickname || '未设置'}}</text>
+      <text class="user-desc text-md">{{userInfo.genderText || ''}} {{userInfo.age ? userInfo.age + '岁' : ''}}</text>
+    </view>
+    <button class="edit-btn btn-text" bindtap="navigateToEditProfile">编辑</button>
+  </view>
+
+  <!-- 健康信息 -->
+  <view class="card fade-in">
+    <view class="card-title text-lg">健康信息</view>
+    <view class="info-list">
+      <view class="list-item" bindtap="toggleDiabetes">
+        <view class="list-item-icon">
+          <text>🩸</text>
+        </view>
+        <view class="list-item-content">
+          <view class="list-item-title text-md">糖尿病</view>
+          <view class="list-item-desc text-sm">{{userInfo.hasDiabetes ? '已患病' : '未患病'}}</view>
+        </view>
+        <text class="list-item-arrow">›</text>
+      </view>
+      <view class="divider"></view>
+      <view class="list-item" bindtap="toggleHypertension">
+        <view class="list-item-icon">
+          <text>❤️</text>
+        </view>
+        <view class="list-item-content">
+          <view class="list-item-title text-md">高血压</view>
+          <view class="list-item-desc text-sm">{{userInfo.hasHypertension ? '已患病' : '未患病'}}</view>
+        </view>
+        <text class="list-item-arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="card fade-in">
+    <view class="card-title text-lg">功能</view>
+    <view class="list">
+      <view class="list-item" bindtap="navigateToTrendGlucose">
+        <view class="list-item-icon">
+          <text>📊</text>
+        </view>
+        <text class="list-item-title text-md">血糖趋势</text>
+        <text class="list-item-arrow">›</text>
+      </view>
+      <view class="list-item" bindtap="navigateToTrendPressure">
+        <view class="list-item-icon">
+          <text>📈</text>
+        </view>
+        <text class="list-item-title text-md">血压趋势</text>
+        <text class="list-item-arrow">›</text>
+      </view>
+      <view class="list-item" bindtap="showAbout">
+        <view class="list-item-icon">
+          <text>ℹ️</text>
+        </view>
+        <text class="list-item-title text-md">关于</text>
+        <text class="list-item-arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 使用统计 -->
+  <view class="card fade-in">
+    <view class="card-title text-lg">使用统计</view>
+    <view class="stats-grid">
+      <view class="stat-item">
+        <text class="stat-number text-number">{{totalRecords}}</text>
+        <text class="stat-label text-sm text-secondary">总记录数</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-number text-number">{{glucoseRecords}}</text>
+        <text class="stat-label text-sm text-secondary">血糖记录</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-number text-number">{{pressureRecords}}</text>
+        <text class="stat-label text-sm text-secondary">血压记录</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-number text-number">{{usingDays}}</text>
+        <text class="stat-label text-sm text-secondary">使用天数</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 退出登录 -->
+  <button class="logout-btn btn-text" bindtap="handleLogout">退出登录</button>
+
+  <!-- 测试功能（仅开发环境显示） -->
+  <view class="test-section fade-in" wx:if="{{isDev}}">
+    <view class="card-title text-lg">测试功能</view>
+    <button class="test-btn" bindtap="importTestData">导入张大爷测试数据</button>
+  </view>
+</view>

@@ -1,0 +1,104 @@
+<!--pages/edit-profile/index.wxml-->
+<view class="container">
+  <!-- 头像 -->
+  <view class="avatar-section">
+    <image class="avatar" src="{{userInfo.avatar || '/images/icons/default-avatar.png'}}" mode="aspectFill"></image>
+    <button class="avatar-btn" bindtap="chooseAvatar">更换头像</button>
+  </view>
+
+  <!-- 基本信息 -->
+  <view class="section">
+    <view class="section-title">基本信息</view>
+
+    <!-- 昵称 -->
+    <view class="form-item">
+      <text class="form-label">昵称</text>
+      <input class="form-input" value="{{nickname}}" placeholder="请输入昵称" bindinput="onNicknameInput" />
+    </view>
+
+    <!-- 性别 -->
+    <view class="form-item">
+      <text class="form-label">性别</text>
+      <view class="gender-select">
+        <view
+          class="gender-option {{gender === 1 ? 'active' : ''}}"
+          bindtap="selectGender"
+          data-gender="1"
+        >
+          男
+        </view>
+        <view
+          class="gender-option {{gender === 2 ? 'active' : ''}}"
+          bindtap="selectGender"
+          data-gender="2"
+        >
+          女
+        </view>
+        <view
+          class="gender-option {{gender === 0 ? 'active' : ''}}"
+          bindtap="selectGender"
+          data-gender="0"
+        >
+          未知
+        </view>
+      </view>
+    </view>
+
+    <!-- 生日 -->
+    <view class="form-item">
+      <text class="form-label">出生日期</text>
+      <picker mode="date" value="{{birthday}}" end="{{today}}" bindchange="onDateChange">
+        <view class="picker-value">
+          {{birthday || '请选择出生日期'}}
+          <text class="picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 健康信息 -->
+  <view class="section">
+    <view class="section-title">健康信息</view>
+
+    <!-- 糖尿病 -->
+    <view class="form-item toggle-item">
+      <view class="toggle-label">
+        <text class="form-label">糖尿病</text>
+        <text class="form-desc">是否患有糖尿病</text>
+      </view>
+      <switch checked="{{hasDiabetes}}" bindchange="toggleDiabetes" color="#FF9F43" />
+    </view>
+
+    <!-- 高血压 -->
+    <view class="form-item toggle-item">
+      <view class="toggle-label">
+        <text class="form-label">高血压</text>
+        <text class="form-desc">是否患有高血压</text>
+      </view>
+      <switch checked="{{hasHypertension}}" bindchange="toggleHypertension" color="#FF9F43" />
+    </view>
+  </view>
+
+  <!-- 紧急联系人 -->
+  <view class="section">
+    <view class="section-title">紧急联系人</view>
+
+    <!-- 联系人姓名 -->
+    <view class="form-item">
+      <text class="form-label">联系人</text>
+      <input class="form-input" value="{{emergencyContact}}" placeholder="请输入联系人姓名" bindinput="onContactInput" />
+    </view>
+
+    <!-- 联系电话 -->
+    <view class="form-item">
+      <text class="form-label">联系电话</text>
+      <input class="form-input" type="number" value="{{emergencyPhone}}" placeholder="请输入联系电话" maxlength="11" bindinput="onPhoneInput" />
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="button-group">
+    <button class="btn btn-cancel" bindtap="onCancel">取消</button>
+    <button class="btn btn-save" bindtap="onSave">保存</button>
+  </view>
+</view>

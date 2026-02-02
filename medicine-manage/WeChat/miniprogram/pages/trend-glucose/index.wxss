@@ -1,0 +1,123 @@
+/* pages/trend-glucose/index.wxss */
+
+/* ===== 统计网格 ===== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.stat-item {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: var(--shadow-md);
+}
+
+.stat-label {
+  margin-bottom: var(--space-xs);
+  font-weight: 500;
+}
+
+.stat-value {
+  margin-bottom: var(--space-xs);
+}
+
+.stat-unit {
+  font-weight: normal;
+}
+
+/* ===== 图表区域 ===== */
+.chart-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.chart-canvas {
+  width: 100%;
+  height: 600rpx;
+  margin-top: var(--space-md);
+}
+
+/* 图例 */
+.chart-legend {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+  margin: var(--space-md) 0;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.legend-color {
+  width: 24rpx;
+  height: 24rpx;
+  border-radius: 50%;
+}
+
+.legend-fasting {
+  background-color: #4A90E2;
+}
+
+.legend-postprandial {
+  background-color: #FF9F43;
+}
+
+.legend-text {
+  font-size: 28rpx;
+  color: var(--text-secondary);
+}
+
+/* ===== 数据列表 ===== */
+.data-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.data-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) 0;
+  border-bottom: 2rpx solid var(--border-color);
+}
+
+.data-item:last-child {
+  border-bottom: none;
+}
+
+.data-date {
+  flex: 0 0 120rpx;
+  font-weight: 500;
+}
+
+.data-values {
+  display: flex;
+  gap: var(--space-xl);
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.data-value-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80rpx;
+}
+
+.data-value-label {
+  margin-bottom: var(--space-xs);
+}
+
+.data-value {
+  font-weight: bold;
+  font-size: 32rpx;
+}

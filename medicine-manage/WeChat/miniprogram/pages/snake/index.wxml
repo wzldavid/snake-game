@@ -1,0 +1,34 @@
+<!-- snake/index.wxml -->
+<view class="container">
+  <view class="game-title">贪吃蛇游戏</view>
+  
+  <view class="game-container">
+    <canvas 
+      canvas-id="snakeCanvas" 
+      class="snake-canvas"
+      style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;"
+      bindtouchstart="handleTouchStart"
+      bindtouchend="handleTouchEnd"
+    ></canvas>
+  </view>
+  
+  <view class="button-container">
+    <button 
+      class="game-button"
+      bindtap="handleButtonClick"
+    >
+      {{gameState === 'ready' ? '开始游戏' : (gameState === 'over' ? '重新开始' : '暂停游戏')}}  
+    </button>
+  </view>
+  
+  <view class="score-container">
+    <text class="score-text">当前分数: {{score}}</text>
+  </view>
+  
+  <view class="instructions">
+    <text class="instructions-text">游戏说明：</text>
+    <text class="instructions-detail">1. 使用触摸滑动控制蛇的移动方向</text>
+    <text class="instructions-detail">2. 吃到红色方块增加分数和蛇的长度</text>
+    <text class="instructions-detail">3. 撞到墙壁或自身游戏结束</text>
+  </view>
+</view>
