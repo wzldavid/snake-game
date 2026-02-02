@@ -1,9 +1,0 @@
-{
-  "name": "importTestData",
-  "version": "1.0.0",
-  "description": "导入张大爷测试数据",
-  "main": "index.js",
-  "dependencies": {
-    "wx-server-sdk": "~2.6.3"
-  }
-}
